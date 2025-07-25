@@ -3,10 +3,7 @@
 // wait until all the spawned threads have finished and should collect their
 // return values into a vector.
 
-use std::{
-    thread,
-    time::{Duration, Instant},
-};
+use std::{ thread, time::{ Duration, Instant } };
 
 fn main() {
     let mut handles = Vec::new();
@@ -24,6 +21,10 @@ fn main() {
     for handle in handles {
         // TODO: Collect the results of all threads into the `results` vector.
         // Use the `JoinHandle` struct which is returned by `thread::spawn`.
+        match handle.join() {
+            Ok(result) => results.push(result),
+            Err(_) => panic!("Thread panicked!"),
+        }
     }
 
     if results.len() != 10 {

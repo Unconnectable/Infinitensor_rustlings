@@ -35,6 +35,8 @@ impl From<&str> for Person {
         let Ok(age) = age.parse() else {
             return Self::default();
         };
+        let age = age_.parse::<u8>().unwrap_or_default();
+        //let age = age_str.parse::<u8>().map_err(ParsePersonError::ParseInt)?;
 
         Self {
             name: name.into(),
